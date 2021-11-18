@@ -1,6 +1,8 @@
 // 入口文件
 import Vue from 'vue'
 import App from './App'
+import './common/stylus/mixins.styl'
+import 'swiper/dist/css/swiper.css'
 //引入路由器
 import router from './router'
 
