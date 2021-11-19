@@ -182,6 +182,7 @@ export default {
 
           .link_to_food {
             width: 25%;
+            text-decoration: none;
 
             .food_container {
               display: block;
