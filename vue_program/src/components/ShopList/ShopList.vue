@@ -278,18 +278,19 @@ export default {};
   margin-right: 0;
 }
 
-.star-item.on {
-  background-image: "./images/stars/star48_on";
+.star-item .on {
+  background-image: url(./images/stars/star48_on@2x.png);
   /* bg-image('./images/stars/star48_on'); */
 }
 
-.star-item.half {
-  background-image: "./images/stars/star48_half";
+.star-item .half {
+  background-image: url(./images/stars/star48_half@2x.png);
+  /* background-image: "./images/stars/star48_half"; */
   /* bg-image('./images/stars/star48_half'); */
 }
 
-.star-item.off {
-  background-image: "./images/stars/star48_off";
+.star-item .off {
+  background-image: url(./images/stars/star48_off@2x.png);
   /* bg-image('./images/stars/star48_off'); */
 }
 
@@ -299,21 +300,21 @@ export default {};
   margin-right: 6px;
   background-size: 15px 15px;
 }
-/* .star-item :last-child {
-                      margin-right: 0;
-                    }
+.star-item:last-child {
+  margin-right: 0;
+}
 
-                     .star-item .on {
-                      bg-image('./images/stars/star36_on');
-                    }
+.star-item .on {
+  background-image: url(./images/stars/star36_on@2x.png);
+}
 
-                     .star-item .half {
-                      bg-image('./images/stars/star36_half');
-                    }
+.star-item .half {
+  background-image: url(./images/stars/star36_half@2x.png);
+}
 
-                     .star-item .off {
-                      bg-image('./images/stars/star36_off');
-                    } */
+.star-item .off {
+  background-image: url(./images/stars/star36_off@2x.png);
+}
 
 .star-24 .star-item {
   width: 10px;
@@ -325,18 +326,18 @@ export default {};
   margin-right: 0;
 }
 
-.star-item.on {
-  background-image: "./images/stars/star24_on";
+.star-item .on {
+  background-image: url(./images/stars/star24_on@2x.png);
   /* bg-image('./images/stars/star24_on'); */
 }
 
-.star-item.half {
-  background-image: "./images/stars/star24_half";
+.star-item .half {
+  background-image: url(./images/stars/star24_half@2x.png);
   /* bg-image('./images/stars/star24_half'); */
 }
 
-.star-item.off {
-  background-image: "./images/stars/star24_off";
+.star-item .off {
+  background-image: url(./images/stars/star24_off@2x.png);
   /* bg-image('./images/stars/star24_off'); */
 }
 
