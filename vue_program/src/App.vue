@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <FooterGuide/>
+    <!-- 当前路由下的meta里的showFooter属性是否为true，为true就展示FooterGuide -->
+    <FooterGuide v-show="$route.meta.showFooter"/>
   </div>
 </template>
 

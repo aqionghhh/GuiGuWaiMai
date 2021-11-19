@@ -3,7 +3,8 @@
     <HeaderTop title="我的"></HeaderTop>
 
     <section class="profile-number">
-      <a href="javascript:" class="profile-link">
+      <!-- 跳转登录组件 -->
+      <router-link to="/login" class="profile-link">
         <div class="profile_image">
           <i class="iconfont icon-geren1"></i>
         </div>
@@ -17,10 +18,11 @@
           </p>
         </div>
         <span class="arrow">
-          <i class="iconfont icon-jiantou1"></i>
+          <i class="iconfont icon-youjiantou"></i>
         </span>
-      </a>
+      </router-link>
     </section>
+
     <section class="profile_info_data border-1px">
       <ul class="info_data_list">
         <a href="javascript:" class="info_data_link">
@@ -102,296 +104,262 @@ export default {
 };
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
-@import '../../common/stylus/mixins.styl';
-
-.profile { // 我的
+<style  rel="stylesheet/stylus">
+.profile {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 2px;
   width: 100%;
+}
+.header {
+  background-color: #02a774;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 45px;
+}
+.header_search {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10%;
+  height: 50%;
+}
+.icon-sousuo {
+  font-size: 25px;
+  color: #fff;
+}
+.header_title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  color: #fff;
+  text-align: center;
+}
+.header_title_text {
+  font-size: 20px;
+  color: #fff;
+  display: block;
+}
+.header_login {
+  font-size: 14px;
+  color: #fff;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.header_login_text {
+  color: #fff;
+}
+.profile-number {
+  margin-top: 45.5px;
+}
+.profile-link {
+  padding: 20px 10px 100px;
+  position: relative;
+  display: block;
+  background: #02a774;
+  padding: 20px 10px 100px;
+}
 
-  .header {
-    background-color: #02a774;
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 45px;
+.profile_image {
+  float: left;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  vertical-align: top;
+  color: #fff;
+}
+.icon-geren1 {
+  font-size: 60px;
+}
+.icon-person {
+  background: #e4e4e4;
+  font-size: 62px;
+}
+.user-info {
+  float: left;
+  margin-left: 15px;
+  padding: 0;
+}
+.user-info p {
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+}
+.user-info p .user-info-top {
+  padding-bottom: 8px;
+}
 
-    .header_search {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 10%;
-      height: 50%;
+.user-icon {
+  display: inline-block;
+  margin-left: -15px;
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+}
+.icon-mobile {
+  font-size: 30px;
+  vertical-align: text-top;
+}
 
-      .icon-sousuo {
-        font-size: 25px;
-        color: #fff;
-      }
-    }
+.icon-mobile-number {
+  font-size: 14px;
+  color: #fff;
+}
 
-    .header_title {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 50%;
-      color: #fff;
-      text-align: center;
+.arrow {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  right: 15px;
+  top: 40%;
+}
+.icon-youjiantou {
+  color: #fff;
+  font-size: 5px;
+}
+.profile_info_data {
+  width: 100%;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+  border: none;
+}
+.profile_info_data::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e4e4e4;
+  transform: scaleY(0.5);
+}
 
-      .header_title_text {
-        font-size: 20px;
-        color: #fff;
-        display: block;
-      }
-    }
+.info_data_list ::after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
-    .header_login {
-      font-size: 14px;
-      color: #fff;
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
+.info_data_link {
+  float: left;
+  width: 33%;
+  text-align: center;
+  border-right: 1px solid #f1f1f1;
+  text-decoration: none;
+}
+.info_data_top {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  color: #333;
+  padding: 15px 5px 10px;
+}
+.info_data_top span {
+  display: inline-block;
+  font-size: 30px;
+  color: #f90;
+  font-weight: 700;
+  line-height: 30px;
+}
+.info_data_bottom {
+  display: inline-block;
+  font-size: 14px;
+  color: #666;
+  font-weight: 400;
+  padding-bottom: 10px;
+}
 
-      .header_login_text {
-        color: #fff;
-      }
-    }
-  }
+.info_data_link:nth-of-type(2) .info_data_top span {
+  color: #ff5f3e;
+}
 
-  .profile-number {
-    margin-top: 45.5px;
+.info_data_link:nth-of-type(3) {
+  border: 0;
+}
+.info_data_top span {
+  color: #6ac20b;
+}
 
-    .profile-link {
-      *zoom 1 {
-        &::after {
-          content: '';
-          display: block;
-          clear: both;
-        }
-      }
+.profile_my_order {
+  margin-top: 10px;
+  background: #fff;
 
-      position: relative;
-      display: block;
-      background: #02a774;
-      padding: 20px 10px;
+  position: relative;
+}
 
-      .profile_image {
-        float: left;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        overflow: hidden;
-        vertical-align: top;
+.profile_my_order::before content {
+  position: absolute;
+  z-index: 200;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e4e4e4;
+}
 
-        .icon-person {
-          background: #e4e4e4;
-          font-size: 62px;
-        }
-      }
+.my_order {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  text-decoration: none;
+}
+.my_order span {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  padding-left: 5px;
+}
 
-      .user-info {
-        float: left;
-        margin-top: 8px;
-        margin-left: 15px;
+.my_order span .iconfont {
+  margin-left: -10px;
+  font-size: 30px;
+}
 
-        p {
-          font-weight: 700;
-          font-size: 18px;
-          color: #fff;
+.icon-dingdanxiangqing-dingdanbianhao {
+  color: #02a774;
+}
 
-          &.user-info-top {
-            padding-bottom: 8px;
-          }
+.icon-jifen {
+  color: #ff5f3e;
+}
 
-          .user-icon {
-            display: inline-block;
-            margin-left: -15px;
-            margin-right: 5px;
-            width: 20px;
-            height: 20px;
+.icon-huiyuan {
+  color: #f90;
+}
 
-            .icon-mobile {
-              font-size: 30px;
-              vertical-align: text-top;
-            }
-          }
+.icon-fuwuzhongxin {
+  color: #02a774;
+}
 
-          .icon-mobile-number {
-            font-size: 14px;
-            color: #fff;
-          }
-        }
-      }
-
-      .arrow {
-        width: 12px;
-        height: 12px;
-        position: absolute;
-        right: 15px;
-        top: 40%;
-
-        .icon-youjiantou {
-          color: #fff;
-          font-size: 5px;
-        }
-      }
-    }
-  }
-
-  .profile_info_data {
-    width: 100%;
-    background: #fff;
-    overflow: hidden;
-    position: relative;
-    border: none;
-
-    &:after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 1px;
-      background-color: #e4e4e4;
-      transform: scaleY(0.5);
-    }
-
-    .info_data_list {
-      *zoom 1 {
-        &::after {
-          content: '';
-          display: block;
-          clear: both;
-        }
-      }
-    }
-
-    .info_data_link {
-      float: left;
-      width: 33%;
-      text-align: center;
-      border-right: 1px solid #f1f1f1;
-
-      .info_data_top {
-        display: block;
-        width: 100%;
-        font-size: 14px;
-        color: #333;
-        padding: 15px 5px 10px;
-
-        span {
-          display: inline-block;
-          font-size: 30px;
-          color: #f90;
-          font-weight: 700;
-          line-height: 30px;
-        }
-      }
-
-      .info_data_bottom {
-        display: inline-block;
-        font-size: 14px;
-        color: #666;
-        font-weight: 400;
-        padding-bottom: 10px;
-      }
-    }
-
-    .info_data_link:nth-of-type(2) {
-      .info_data_top {
-        span {
-          color: #ff5f3e;
-        }
-      }
-    }
-
-    .info_data_link:nth-of-type(3) {
-      border: 0;
-
-      .info_data_top {
-        span {
-          color: #6ac20b;
-        }
-      }
-    }
-  }
-
-  .profile_my_order {
-    margin-top: 10px;
-    background: #fff;
-
-    position relative {
-      &::before content '' {
-        position: absolute;
-        z-index: 200;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 1px;
-        background-color: #e4e4e4;
-      }
-    }
-
-    .my_order {
-      display: flex;
-      align-items: center;
-      padding-left: 15px;
-
-      >span {
-        display: flex;
-        align-items: center;
-        width: 20px;
-        height: 20px;
-
-        >.iconfont {
-          margin-left: -10px;
-          font-size: 30px;
-        }
-
-        .icon-dingdanxiangqing-dingdanbianhao {
-          color: #02a774;
-        }
-
-        .icon-jifen {
-          color: #ff5f3e;
-        }
-
-        .icon-huiyuan {
-          color: #f90;
-        }
-
-        .icon-fuwuzhongxin {
-          color: #02a774;
-        }
-      }
-
-      .my_order_div {
-        width: 100%;
-        border-bottom: 1px solid #f1f1f1;
-        padding: 18px 10px 18px 0;
-        font-size: 16px;
-        color: #333;
-        display: flex;
-        justify-content: space-between;
-
-        span {
-          display: block;
-        }
-
-        .my_order_icon {
-          width: 10px;
-          height: 10px;
-
-          .icon-jiantou1 {
-            color: #bbb;
-            font-size: 10px;
-          }
-        }
-      }
-    }
-  }
+.my_order_div {
+  width: 100%;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 18px 10px 18px 0;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+}
+.my_order_div span {
+  display: block;
+}
+.my_order_div .my_order_icon {
+  width: 10px;
+  height: 10px;
+}
+.my_order_div .my_order_icon .icon-youjiantou {
+  color: #bbb;
+  font-size: 10px;
 }
 </style>

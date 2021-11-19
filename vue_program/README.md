@@ -14,3 +14,11 @@
             |-- Profile.vue-------个人组件 vue 
     |-- App.vue---------------应用根组件 vue 
     |-- main.js---------------应用入口 js
+第二天：
+    各导航路由组件（静态）
+    HeaderTop组件
+    Msite轮播图
+第三天：
+    ShopList组件
+    Login组件（静态）
+    
