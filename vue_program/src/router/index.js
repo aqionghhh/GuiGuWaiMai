@@ -11,7 +11,10 @@ import Search from '../pages/Search/Search';
 import Order from '../pages/Order/Order';
 import Profile from '../pages/Profile/Profile';
 import Login from '../pages/Login/Login';
-
+import Shop from '../pages/Shop/Shop'
+import ShopGoods from '../pages/Shop/ShopGoods/ShopGoods'
+import ShopRatings from '../pages/Shop/ShopRatings/ShopRatings'
+import ShopInfo from '../pages/Shop/ShopInfo/ShopInfo'
 
 // 声明使用插件
 Vue.use(VueRouter)
@@ -54,6 +57,28 @@ export default new VueRouter({
     {//登录组件是一级路由
       path: '/login',
       component: Login
+    },
+    {//购物组件是一级路由
+      path: '/shop',
+      component: Shop,
+      children: [
+        {//点餐路由
+          path: '/shop/goods',
+          component: ShopGoods
+        },
+        {///商家信息路由
+          path: '/shop/info',
+          component: ShopInfo
+        },
+        {//评论路由
+          path: '/shop/ratings',
+          component: ShopRatings
+        },
+        {//进入Shop路由后默认显示的二级路由
+          path: '',
+          redirect: '/shop/goods'
+        },
+      ]
     }
   ]
 })

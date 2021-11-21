@@ -163,3 +163,62 @@ AlertTip组件
 用户名密码登陆、发送短信验证码、手机号验证码登陆、根据会话获取用户信息、用户登出、根据经纬度和关键字搜索商铺列表
 ```
 
+
+
+# 第五天
+
+###### 发送短信验证码
+
+```
+发送短信接口：gshop-server_final\util\sms_util.js
+直接在路由组件Login中发送请求，在methods异步获取短信验证码
+短信登录和密码登录中输入正确后把返回的用户数据存到vuex中并跳转到个人界面this.$router.replace("/profile");
+```
+
+```
+配置完vuex之后在Profile组件中读取存入的userInfo数据，并将用户名展示在页面
+```
+
+```
+异步获取用户信息api用于拿取存储在session中的用户信息并展示在页面上，防止刷新时页面中不显示用户信息。在应用一打开的时候就调用，即在App.vue中调用
+```
+
+ui库：mint-ui （基于vue的移动端组件库）
+
+```
+下载：npm install --save mint-ui   
+实现按需打包
+	1.下载：npm install --save-dev babel-plugin-component
+	2.修改babel配置：
+		"plugins": ["transform-vue-jsx",
+            "transform-runtime",
+            ["component", [
+              {
+                "libraryName": "mint-ui",
+                "style": true
+              }
+            ]]
+          ]
+          
+使用：
+    //引入组件库（在main.js里引入时为了做成全局标签）
+    import { Button } from 'mint-ui'
+    import 'mint-ui/lib/style.min.css'
+    //注册全局组件标签
+    Vue.component(Button.name, Button)//<mt-button></mt-button>
+```
+
+###### 退出登录
+
+```
+也是需要配置vuex，把userInfo清空
+给按钮绑定点击事件logout
+```
+
+###### 搭建商家整体页面
+
+```
+Shop组件 一级路由 从ShopList进入
+	组件内有3个子路由和一个ShopHeader一般组件
+```
+

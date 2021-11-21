@@ -5,6 +5,7 @@
         class="shop_li border-1px"
         v-for="(shop, index) in shops"
         :key="index"
+        @click="$router.push('/shop')"
       >
         <a>
           <div class="shop_left">
@@ -64,10 +65,10 @@
 
 <script>
 import { mapState } from "vuex";
-import Star from '../Star/Star';
+import Star from "../Star/Star";
 export default {
-  components:{
-    Star
+  components: {
+    Star,
   },
   computed: {
     ...mapState(["shops"]),
@@ -76,7 +77,6 @@ export default {
 </script>
 
 <style>
-
 .shop_container {
   margin-bottom: 50px;
 }
