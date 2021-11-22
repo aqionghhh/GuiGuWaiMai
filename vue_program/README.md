@@ -222,3 +222,74 @@ Shop组件 一级路由 从ShopList进入
 	组件内有3个子路由和一个ShopHeader一般组件
 ```
 
+###### 使用mockjs模块模拟数据接口
+
+```
+要了解mockjs的机制
+要在mian.js中引入mockServer.js
+ajax请求mockjs模拟的接口（在mockServer.js文件中写mock数据接口）
+要会设计json数据的结构（类型和名称）
+不需要设置代理
+```
+
+###### ShopHeader组件
+
+```
+1.异步显示数据效果的编码流程
+	ajax
+		ajax请求函数
+		接口请求函数
+	vuex
+		state
+		mutation-types
+		actions
+		mutations
+	组件
+		dispatch():异步获取后台数据到vuex的state
+		mapState():从vuex的state中读取对应的数据
+2.
+```
+
+###### 注意：
+
+```
+undefined.xxx  会报错 Cannot read property 'xxx' of undefined
+null.xxx       会报错 Cannot read property 'xxx' of null
+xxx.undefined  不会报错
+使用vue的chrome插件查看vue和vuex中的state和组件中的数据
+```
+
+# 第六天
+
+###### ShopGoods组件
+
+```
+cartControl组件 购物车增减
+ShopCart组件 购物车
+Food组件 食物显示
+```
+
+```
+滑动效果分析：
+前提：先要实现左右两个列表的滑动
+	需求：
+		显示当前分类
+		当滑动右侧列表时，更新当前分类
+		点击某个分类想，右侧列表滑动到对应位置
+		
+	需要设置类名current 标识当前分类
+	设计一个计算属性：currentIndex，计算得到当前分类的下标，当它与遍历的index		相同时，显示类名current
+	根据哪些数据计算：
+		scrollY: 右侧滑动的Y轴坐标（滑动过程实时变化）
+		tops: 所有右侧分类li的top组成的数组（列表第一次显示后就不再变化）
+	
+	1.在滑动过程中，实时收集scrollY
+	2.在列表第一次显示后，收集tops
+	3.实现currentIndex的计算逻辑
+	
+```
+
+![image-20211122164104861](C:\Users\26671\AppData\Roaming\Typora\typora-user-images\image-20211122164104861.png)
+
+
+

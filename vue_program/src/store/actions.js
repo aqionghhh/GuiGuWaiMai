@@ -1,7 +1,7 @@
 /**
  * 通过mutation间接更新state的多个方法的对象
  */
-import { RECEIVE_ADDRESS, RECEIVE_CATGORYS, RECEIVE_SHOPS, RECEIVE_USER_INFO, RESET_USER_INFO, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS } from './mutation-types'
+import { RECEIVE_ADDRESS, RECEIVE_CATGORYS, RECEIVE_SHOPS, RECEIVE_USER_INFO, RESET_USER_INFO, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREMENT_FOOD_COUNT, DECREMENT_FOOD_COUNT } from './mutation-types'
 import { reqAddress, reqFoodCategorys, reqLogout, reqShops, reqUserInfo, reqShopRatings, reqShopGoods, reqShopInfo } from '../api'
 
 export default {//要有与后台交互的异步actions
@@ -77,11 +77,22 @@ export default {//要有与后台交互的异步actions
     }
   },
   // 异步获取商家商品列表 
-  async getShopGoods({ commit }) {
+  async getShopGoods({ commit }, callback) {//callback可传可不传
     const result = await reqShopGoods()
     if (result.code === 0) {
       const goods = result.data
       commit(RECEIVE_GOODS, { goods }) // 如果组件中传递了接收消息的回调函数, 数据更新后, 调用回调通知调用的组件 
+      //数据更新了，通知一下组件
+      callback && callback()
     }
   },
+
+  //同步更新food中的count值
+  updateFoodCount({ commit }, { isAdd, food }) {
+    if (isAdd) {
+      commit(INCREMENT_FOOD_COUNT, { food })
+    } else {
+      commit(DECREMENT_FOOD_COUNT, { food })
+    }
+  }
 }
