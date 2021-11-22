@@ -14,7 +14,6 @@ Vue.component(Button.name, Button)//<mt-button></mt-button>
 
 //引入mockServer
 import './mock/mockServer';
-
 Vue.config.productionTip = false;//阻止vue在启动时生成生产提示
 
 new Vue({

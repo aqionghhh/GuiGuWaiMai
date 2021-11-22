@@ -1,14 +1,11 @@
 module.exports = {
-  presets: [
-    '@vue/cli-plugin-babel/preset'
-  ],
-  "plugins": ["transform-vue-jsx",
-    "transform-runtime",
-    ["component", [
+  "presets": ["@babel/preset-env"],
+  "plugins": ["@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-class-properties",
+    ["component",
       {
         "libraryName": "mint-ui",
         "style": true
       }
     ]]
-  ]
 }
