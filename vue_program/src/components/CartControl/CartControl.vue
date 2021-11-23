@@ -4,12 +4,15 @@
       <div
         class="iconfont icon-remove"
         v-if="food.count"
-        @click="updateFoodCount(false)"
+        @click.stop="updateFoodCount(false)"
       ></div>
     </transition>
 
     <div class="cart-count" v-if="food.count">{{ food.count }}</div>
-    <div class="iconfont icon-zengjia" @click="updateFoodCount(true)"></div>
+    <div
+      class="iconfont icon-zengjia"
+      @click.stop="updateFoodCount(true)"
+    ></div>
   </div>
 </template>
 
