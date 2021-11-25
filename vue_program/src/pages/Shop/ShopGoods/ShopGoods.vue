@@ -57,8 +57,9 @@
           </li>
         </ul>
       </div>
+      <ShopCart/>
     </div>
-    <Food :food="food" ref="food"/>
+    <Food :food="food" ref="food" />
   </div>
 </template>
 
@@ -67,6 +68,7 @@ import BScroll from "better-scroll";
 import { mapState } from "vuex";
 import CartControl from "../../../components/CartControl/CartControl";
 import Food from "../../../components/Food/Food";
+import ShopCart from "../../../components/ShopCart/ShopCart";
 
 export default {
   data() {
@@ -140,12 +142,12 @@ export default {
     },
 
     //显示点击的food
-    showFood(food){
+    showFood(food) {
       //设置food
-      this.food = food
+      this.food = food;
       //显示food组件（需要在父组件调用子组件对象的方法）
-      this.$refs.food.toggleShow()
-    }
+      this.$refs.food.toggleShow();
+    },
   },
   computed: {
     ...mapState(["goods"]),
@@ -166,6 +168,7 @@ export default {
   components: {
     CartControl,
     Food,
+    ShopCart,
   },
 };
 </script>

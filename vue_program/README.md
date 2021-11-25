@@ -293,3 +293,13 @@ Food组件 食物显示
 
 
 
+# 第七天
+
+底部购物车组件ShopCart
+
+![image-20211125220640041](C:\Users\26671\AppData\Roaming\Typora\typora-user-images\image-20211125220640041.png)
+
+```
+模板里面要显示东西有三个来源：props、data、computed
+```
+
