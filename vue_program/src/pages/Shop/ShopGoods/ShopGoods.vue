@@ -57,7 +57,7 @@
           </li>
         </ul>
       </div>
-      <ShopCart/>
+      <ShopCart />
     </div>
     <Food :food="food" ref="food" />
   </div>
@@ -181,7 +181,7 @@ body {
 .goods {
   display: flex;
   position: absolute;
-  top: 195px;
+  top: 210px;
   bottom: 46px;
   width: 100%;
   background: #fff;

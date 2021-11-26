@@ -19,33 +19,37 @@
           <div class="pay" :class="payClass">{{ payText }}</div>
         </div>
       </div>
-      <div class="shopcart-list" v-show="isShow">
-        <div class="list-header">
-          <h1 class="title">购物车</h1>
-          <span class="empty">清空</span>
-        </div>
-        <div class="list-content">
-          <ul>
-            <li class="food" v-for="(food, index) in cartFoods" :key="index">
-              <span class="name">{{ food.name }}</span>
-              <div class="price1">
-                <span>￥{{ food.price }}</span>
-              </div>
-              <div class="cartcontrol-wrapper">
-                <div class="cartcontrol">
-                  <CartControl :food="food" />
+      <transition name="move">
+        <div class="shopcart-list" v-show="listShow">
+          <div class="list-header">
+            <h1 class="title">购物车</h1>
+            <span class="empty" @click="clearCart">清空</span>
+          </div>
+          <div class="list-content">
+            <ul>
+              <li class="food" v-for="(food, index) in cartFoods" :key="index">
+                <span class="name">{{ food.name }}</span>
+                <div class="price1">
+                  <span>￥{{ food.price }}</span>
                 </div>
-              </div>
-            </li>
-          </ul>
+                <div class="cartcontrol-wrapper">
+                  <div class="cartcontrol">
+                    <CartControl :food="food" />
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
-    <div class="list-mask" v-show="isShow" @click="toggleShow"></div>
+    <div class="list-mask" v-show="listShow" @click="toggleShow"></div>
   </div>
 </template>
 
 <script>
+import {MessageBox} from 'mint-ui';
+import BScroll from "better-scroll";
 import CartControl from "../CartControl/CartControl";
 import { mapState, mapGetters } from "vuex";
 export default {
@@ -59,8 +63,17 @@ export default {
   },
   methods: {
     toggleShow() {
-      this.isShow = !this.isShow;
+      //只有当总数量大于0时才切换
+      if (this.totalCount > 0) {
+        this.isShow = !this.isShow;
+      }
     },
+    //清空购物车
+    clearCart(){//要用到mint.ui
+      MessageBox.confirm('确定清空购物车吗？').then(action=>{
+        this.$store.dispatch('clearCart')
+      })
+    }
   },
   computed: {
     ...mapState(["cartFoods", "info"]), //cartFoods是state里面的某个状态属性
@@ -80,6 +93,26 @@ export default {
       } else {
         return "结算";
       }
+    },
+    listShow() {
+      //如果总数量为0，直接不显示
+      if (this.totalCount === 0) {
+        this.isShow = false;
+        return false;
+      }
+      if (this.isShow) {
+        this.$nextTick(() => {
+          //实现BScroll的实例是一个单例，所以只能创建一个BScroll对象
+          if (!this.scroll) {
+            //创建之前判断this.scroll存不存在
+            //不存在：创建、保存
+            this.scroll = new BScroll(".list-content", {
+              click: true,
+            });
+          }
+        });
+      }
+      return this.isShow;
     },
   },
 };
@@ -205,12 +238,13 @@ export default {
   width: 100%;
   transform: translateY(-100%);
 }
-.swipe-enter-active,
-.swipe-leave-active {
+.move-enter-active,
+.move-leave-active {
   transition: transform 0.3s;
 }
-.swipe-enter,
-.swipe-leave-to {
+
+.move-enter,
+.move-leave-to {
   transform: translateY(0);
 }
 .list-header {

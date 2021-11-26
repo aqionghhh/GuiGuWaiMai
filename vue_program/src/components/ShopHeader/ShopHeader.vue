@@ -243,6 +243,9 @@ img {
 .activity-content {
   color: black;
   font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .content-name {
   font-weight: 700;

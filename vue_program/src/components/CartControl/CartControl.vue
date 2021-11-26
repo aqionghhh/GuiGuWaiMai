@@ -51,7 +51,7 @@ export default {
   color: $green;
   position: absolute;
   bottom: -15px;
-  right: 40px;
+  right: 30px;
 }
 
 .move-enter-active, .move-leave-active {
@@ -75,7 +75,7 @@ export default {
   color: rgb(147, 153, 159);
   position: absolute;
   bottom: -10px;
-  right: 32px;
+  right: 23px;
 }
 
 .icon-zengjia {
@@ -86,6 +86,6 @@ export default {
   color: $green;
   position: absolute;
   bottom: -15px;
-  right: -2px;
+  right: -12px;
 }
 </style>

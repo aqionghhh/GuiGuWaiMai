@@ -286,7 +286,6 @@ Food组件 食物显示
 	1.在滑动过程中，实时收集scrollY
 	2.在列表第一次显示后，收集tops
 	3.实现currentIndex的计算逻辑
-	
 ```
 
 ![image-20211122164104861](C:\Users\26671\AppData\Roaming\Typora\typora-user-images\image-20211122164104861.png)
@@ -297,9 +296,58 @@ Food组件 食物显示
 
 底部购物车组件ShopCart
 
+需要使用vuex管理购物项数据：cartFoods
+
 ![image-20211125220640041](C:\Users\26671\AppData\Roaming\Typora\typora-user-images\image-20211125220640041.png)
+
+
 
 ```
 模板里面要显示东西有三个来源：props、data、computed
 ```
 
+
+
+# 第八天
+
+###### 总结：点餐界面
+
+```
+基本滑动：
+	使用better-scroll插件
+	创建BScroll对象的时机（在列表显示之后）（有两种方法
+		1.watch+$nextTick() 
+		2.callback+$nextTick()  
+滑动右侧列表，左侧同步更新
+	better-scroll仅用了原生dom事件，使用的是自定义事件
+	绑定监听：scroll/scrollEnd
+	滚动监听的类型：probeType
+	
+CartControl组件
+	问题：更新状态数据，对应的界面不变化
+	原因：一般方法给一个已有绑定的对象中添加一个新的属性，这个属性没有数据绑定
+	解决：
+		Vue.set(obj,'xxx',value) 才有数据绑定
+	  或this.$set(obj,'xxx',value) 才有数据绑定
+```
+
+```
+父子组件问题：	
+	子组件调用都组件的方法，通过props将方法传递给子组件
+	父组件调用子组件的方法：通过ref找到子组件标签对象
+```
+
+###### 购物车列表的滑动
+
+```
+在ShopCart组件中引入better-scroll
+	同样是在列表刷新后调用，即在listShow方法中创建对象
+```
+
+###### 清空购物车
+
+```
+引入mint-ui
+```
+
+##### 如何判断是同步请求还是异步请求？根据是否访问服务器吗？
