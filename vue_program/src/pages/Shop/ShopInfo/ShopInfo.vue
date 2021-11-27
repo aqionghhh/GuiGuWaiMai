@@ -77,18 +77,36 @@ export default {
     ...mapState(["info"]),
   },
   mounted() {
-    new BScroll(".shop-info");
+    //如果数据还没有，直接结束
+    if (!this.info.pics) {
+      return;
+    }
 
-    //动态计算ul的宽度
-    const ul = this.$refs.picsUl;
-    const liWidth = 120;
-    const space = 5;
-    const count = this.info.pics.length;
-    ul.style.width = (liWidth + space) * count - space + "px";
+    //数据有了，可以创建BScroll对象形成滑动
+    this._initScroll();
+  },
+  methods: {
+    _initScroll() {
+      new BScroll(".shop-info");
+      //动态计算ul的宽度
+      const ul = this.$refs.picsUl;
+      const liWidth = 120;
+      const space = 5;
+      const count = this.info.pics.length;
+      ul.style.width = (liWidth + space) * count - space + "px";
 
-    new BScroll(".pic-wrapper", {
-      scrollX: true, //水平滑动
-    });
+      new BScroll(".pic-wrapper", {
+        scrollX: true, //水平滑动
+      });
+    },
+  },
+  watch: {
+    info() {
+      //书信流程-->更新数据
+      this.$nextTick(() => {
+        this._initScroll();
+      });
+    },
   },
 };
 </script>

@@ -1,8 +1,8 @@
 /**
  * 通过mutation间接更新state的多个方法的对象
  */
-import { RECEIVE_ADDRESS, RECEIVE_CATGORYS, RECEIVE_SHOPS, RECEIVE_USER_INFO, RESET_USER_INFO, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREMENT_FOOD_COUNT, DECREMENT_FOOD_COUNT, CLEAR_CART } from './mutation-types'
-import { reqAddress, reqFoodCategorys, reqLogout, reqShops, reqUserInfo, reqShopRatings, reqShopGoods, reqShopInfo } from '../api'
+import { RECEIVE_ADDRESS, RECEIVE_CATGORYS, RECEIVE_SHOPS, RECEIVE_USER_INFO, RESET_USER_INFO, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, INCREMENT_FOOD_COUNT, DECREMENT_FOOD_COUNT, CLEAR_CART, RECEIVE_SEARCH_SHOPS } from './mutation-types'
+import { reqAddress, reqFoodCategorys, reqLogout, reqShops, reqUserInfo, reqShopRatings, reqShopGoods, reqShopInfo, reqSearchShop } from '../api'
 
 export default {//要有与后台交互的异步actions
   //异步获取地址
@@ -101,5 +101,16 @@ export default {//要有与后台交互的异步actions
   //同步清空购物车
   clearCart({ commit }) {
     commit(CLEAR_CART)
-  }
+  },
+
+  // 异步获取商家商品列表 
+  async searchShops({ commit, state }, keyword) {
+
+    const geohash = state.latitude + ',' + state.longitude
+    const result = await reqSearchShop(geohash, keyword)
+    if (result.code === 0) {
+      const searchShops = result.data
+      commit(RECEIVE_SEARCH_SHOPS, { searchShops })
+    }
+  },
 }

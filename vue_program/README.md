@@ -3,9 +3,35 @@
 ###     src 
 
     |-- components------------非路由组件文件夹 
+    	|-- AlertTip---------------警告弹窗组件
+            |-- AlertTip.vue--------警告弹窗组件 vue 
+    	|-- Food---------------商品详情页中的每个食物组件文件夹 
+            |-- Food.vue--------商品详情页中的每个食物组件 vue 
+    	|-- CartControl---------------商家详情页控制商品加减组件文件夹 
+            |-- CartControl.vue--------商家详情页控制商品加减组件 vue 
         |-- FooterGuide---------------底部组件文件夹 
             |-- FooterGuide.vue--------底部组件 vue 
+    	|-- HeaderTop---------------一级路由的顶部组件文件夹 
+            |-- HeaderTop.vue--------一级路由的顶部组件 vue 
+    	|-- ShopCart---------------商家详情页的底部购物车组件文件夹 
+            |-- ShopCart.vue--------商家详情页的底部购物车组件 vue 
+        |-- ShopHeader---------------商家详情页的头部组件文件夹 
+            |-- ShopHeader.vue--------商家详情页的头部组件 vue 
+    	|-- ShopList---------------所有的商家列表组件文件夹 
+            |-- ShopList.vue--------所有的商家列表组件 vue 
+    	|-- Star---------------用户评价的星星组件文件夹 
+            |-- Star.vue--------用户评价的星星组件 vue 
     |-- pages-----------------路由组件文件夹 
+        |-- Login---------------登录组件文件夹 
+            |-- Login.vue--------登录组件 vue 
+        |-- Shop---------------整个购物组件文件夹 
+            |-- ShopGoods---------------购物组件中的点餐组件文件夹 
+            	|-- ShopGoods.vue--------购物组件中的点餐组件 vue 
+            |-- ShopInfo---------------购物组件中的商家信息组件文件夹 
+            	|-- ShopInfo.vue--------购物组件中的商家信息组件 vue 
+            |-- ShopRatings---------------购物组件中的商品评价组件文件夹 
+            	|-- ShopRatings.vue--------购物组件中的商品评价组件 vue 
+            |-- Shop.vue--------整个购物组件 vue 
         |-- Msite---------------首页组件文件夹 
             |-- Msite.vue--------首页组件 vue 
         |-- Search----------------搜索组件文件夹 
@@ -14,6 +40,12 @@
             |-- Order.vue-------订单组件 vue 
         |-- Profile--------------个人组件文件夹 
             |-- Profile.vue-------个人组件 vue 
+    |-- api---------------api文件夹
+    |-- common---------------静态资源文件夹
+    |-- filters---------------时间格式化过滤器
+    |-- mock---------------模拟请求文件夹
+    |-- router---------------路由配置文件夹
+    |-- store---------------vuex配置文件夹
     |-- App.vue---------------应用根组件 vue 
     |-- main.js---------------应用入口 js
 
@@ -357,6 +389,7 @@ CartControl组件
 
 ```
 需要做列表过滤显示
+	在模板中循环一个自定义数组，自定义数组中存放着三种不同需求的数组，根据数组不同的返回值返回不同的内容
 ```
 
 ###### ShopInfo组件
@@ -364,6 +397,78 @@ CartControl组件
 ```
 有垂直滑动和水平滑动
 有几个地方的滑动就new几个BCsroll
-垂直滑动需要有配置项
+水平滑动需要有配置项：scrollX:true
+
+要考虑创建BScroll对象和数据是否存在的时机，必须是数据存在，才能创建BScroll对象，进行滑动，数据不存在无法滑动
+```
+
+# 第九天
+
+```
+Search组件
+	<router-link></router-link>默认生成<a>标签，tag="li"会让<router-link>生成<li>标签
+	需要设置一个额外的标识变量（在data里设置），如果搜索有值就显示商家数组，如果没值就显示提示文本
+```
+
+```
+涉及到数据对vuex进行的操作顺序：state、mutation-types、mutations、actions
+```
+
+###### 性能优化
+
+```
+缓存路由组件对象（在浏览器端的内存里，把组件对象缓存起来）
+	跳转路由的时候不销毁之前的路由
+	<keep-alive>
+    	<router-view /> 
+    </keep-alive>
+```
+
+```
+路由组件懒加载（需要的时候才去后台请求路由组件的代码）（一般一级路由才做）（小的路由组件不需要（浪费请求））
+写在router/index.js里
+	普通模式：import Msite from '../pages/Msite/Msite';
+	懒加载模式：const Msite = () =>import('../pages/Msite/Msite')
+		返回的是路由组件的函数，即只有执行此函数才会加载路由组件，函数在第一次请求对应的路由路径的时候才会执行
+	使用懒加载路由，会在打包的时候分成多个文件
+```
+
+```
+图片懒加载：vue-lazyload
+	npm install --save vue-lazyload
+	在main.js中引入
+        import VueLazyload from 'vue-lazyload';
+        import loading from './common/imgs/loading.gif';
+        Vue.use(VueLazyload, {//内部自定义了一个指令lazy
+        loading//引入的是转圈圈的加载中图片
+        })
+    使用：在图片中插入属性 v-lazy="img.src"
+    	eg:<img v-lazy="图片名">
+```
+
+###### 路由跳转方式
+
+```
+push：默认，类似压栈操作
+replace：直接在需要的<router-link>标签中添加属性replace 可以直接跳回
+```
+
+###### 自定义过滤器
+
+```
+npm install --save moment
+在filter文件夹中创建index.js
+然后引入vue和momemt
+
+//自定义过滤器
+Vue.filter('date-format',function(value){
+  return moment(value).format('YYYY-MM-DD HH:mm:ss')
+})
+
+不需要向外暴露，在main.js中导入
+//加载过滤器
+import './filters'
+
+在需要用到的组件中使用
 ```
 

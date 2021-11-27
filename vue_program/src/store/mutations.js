@@ -2,7 +2,7 @@
  * 直接更新state的多个方法的对象
  */
 import Vue from 'vue'
-import { RECEIVE_ADDRESS, RECEIVE_CATGORYS, RECEIVE_SHOPS, RECEIVE_USER_INFO, RESET_USER_INFO, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, DECREMENT_FOOD_COUNT, INCREMENT_FOOD_COUNT, CLEAR_CART } from './mutation-types'
+import { RECEIVE_ADDRESS, RECEIVE_CATGORYS, RECEIVE_SHOPS, RECEIVE_USER_INFO, RESET_USER_INFO, RECEIVE_INFO, RECEIVE_RATINGS, RECEIVE_GOODS, DECREMENT_FOOD_COUNT, INCREMENT_FOOD_COUNT, CLEAR_CART,RECEIVE_SEARCH_SHOPS } from './mutation-types'
 
 export default {
   [RECEIVE_ADDRESS](state, { address }) {
@@ -57,5 +57,8 @@ export default {
     state.cartFoods.forEach(food => food.count = 0)//遍历数组cartFoods，把里面food的count全部设为0
     //移除购物车中所有购物项
     state.cartFoods = []
+  },
+  [RECEIVE_SEARCH_SHOPS](state, { searchShops }) {
+    state.searchShops = searchShops
   },
 }
